@@ -33,8 +33,10 @@
 @media(prefers-color-scheme:dark){:root{--bg:#0B1E25;--ink:#E8F1F0;--mute:#9DB5B9;--aqua:#10303A;--line:#1D4450}}
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font:400 clamp(16px,1.2vw+10px,18px)/1.65 'Source Sans 3',system-ui,sans-serif;color:var(--ink);background:var(--bg);overflow-x:hidden}
-h1,h2,h3{font-family:'Bricolage Grotesque',sans-serif;line-height:1.1;letter-spacing:-.02em}
+html,body{overflow-x:clip;max-width:100%}
+main{overflow-x:clip}
+body{font:400 clamp(16px,1.2vw+10px,18px)/1.65 'Source Sans 3','Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;color:var(--ink);background:var(--bg);overflow-x:hidden}
+h1,h2,h3{font-family:'Bricolage Grotesque','Segoe UI',Roboto,Arial,sans-serif;line-height:1.1;letter-spacing:-.02em}
 img{max-width:100%;display:block}a{color:inherit}
 .wrap{max-width:1180px;margin:auto;padding:0 20px}
 section{padding:clamp(56px,9vw,100px) 0}
@@ -48,7 +50,7 @@ h2{font-size:clamp(28px,5vw,46px);margin-bottom:14px}
 header{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .3s,box-shadow .3s}
 header.sc{background:var(--deep);box-shadow:0 4px 20px #0005}
 header .wrap{display:flex;align-items:center;justify-content:space-between;height:70px}
-header img{height:40px;width:auto}
+header img{height:46px;width:auto;background:#fff;padding:5px 10px;border-radius:10px}
 nav ul{display:flex;gap:26px;list-style:none;padding:0;align-items:center}
 nav a{text-decoration:none;font-weight:600;font-size:15px;color:#fff}
 nav a:hover{color:var(--sun)}
@@ -83,7 +85,7 @@ nav a:hover{color:var(--sun)}
 /* about */
 .about{background:var(--aqua)}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,60px);align-items:center}
-.px{overflow:hidden;border-radius:18px;aspect-ratio:4/3}
+.px{overflow:hidden;border-radius:18px;aspect-ratio:4/3;background:linear-gradient(135deg,var(--lagoon),var(--deep))}
 .px{position:relative}.px img{position:absolute;left:0;top:-15%;width:100%;height:130%;object-fit:cover;will-change:transform}
 .tl{margin-top:26px;border-left:3px solid var(--lagoon);padding-left:20px;display:grid;gap:16px}
 .tl b{font:800 22px 'Bricolage Grotesque';color:var(--lagoon);display:block}
@@ -118,6 +120,7 @@ details p{color:var(--mute);margin-top:10px;max-width:70ch}
 /* contact */
 .contact{background:var(--aqua)}
 form{display:grid;gap:14px;margin-top:20px}
+input,textarea,select,button{font-family:inherit}
 input,textarea,select{font:inherit;font-size:16px;padding:14px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);width:100%;min-height:48px}
 .loc{display:grid;gap:16px}.loc div{background:var(--bg);padding:20px;border-radius:14px;border:1px solid var(--line)}
 .loc h3{font-size:20px;color:var(--lagoon);margin-bottom:6px}
@@ -133,14 +136,15 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px}
 /* mobile */
 @media(max-width:900px){
  #tg{display:block}
- nav{position:fixed;inset:70px 0 0;background:var(--deep);padding:26px 24px;transform:translateX(100%);transition:transform .35s;overflow:auto}
- nav.open{transform:none}
+ nav{position:fixed;inset:70px 0 0;background:var(--deep);padding:26px 24px;transform:translateX(100%);visibility:hidden;transition:transform .35s,visibility .35s;overflow:auto}
+ nav.open{transform:none;visibility:visible}
  nav ul{flex-direction:column;align-items:stretch;gap:0}
  nav li a{display:block;padding:16px 0;font-size:20px;border-bottom:1px solid #ffffff22}
- .two{grid-template-columns:1fr}
+ .two{grid-template-columns:minmax(0,1fr)}
  .vs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:34px -20px 0;padding:0 20px 8px;-webkit-overflow-scrolling:touch}
  .vert{flex:0 0 78%;scroll-snap-align:center;min-height:380px}
  .hero .wrap{padding-top:96px}
+ .px{aspect-ratio:16/11}
  .wa{display:none}
  .mb{display:grid;grid-template-columns:repeat(3,1fr);position:fixed;left:0;right:0;bottom:0;z-index:60;background:var(--deep);padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -4px 18px #0006}
  .mb a{padding:14px 4px;text-align:center;color:#fff;text-decoration:none;font-weight:600;font-size:15px}
@@ -162,7 +166,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px}
 .hero h1{text-shadow:0 4px 30px #0008}
 .hero .btn:not(.ghost){box-shadow:0 0 0 0 #F2A93B88;animation:up .9s .35s forwards,pl 2.4s 1.5s infinite}
 @keyframes pl{70%{box-shadow:0 0 0 16px #F2A93B00}}
-.about{position:relative}
+.about{position:relative;overflow:hidden}
 .about::before{content:"";position:absolute;right:-90px;top:-90px;width:260px;height:260px;border-radius:50%;background:radial-gradient(#F2A93B66,#F2A93B00 70%);pointer-events:none}
 .tile{background:linear-gradient(160deg,var(--bg),var(--aqua))}
 dialog{border:0;border-radius:22px;padding:0;width:calc(100% - 28px);max-width:900px;overflow:hidden;background:var(--bg);color:var(--ink);box-shadow:0 30px 80px #0008}
@@ -175,7 +179,8 @@ dialog img{width:100%;height:100%;min-height:300px;object-fit:cover}
 .db ul{margin:16px 0 24px;padding-left:20px;display:grid;gap:6px}.db li::marker{color:var(--sun)}
 .x{position:absolute;top:12px;right:12px;z-index:3;width:44px;height:44px;border-radius:50%;border:0;background:var(--sun);color:#1a1200;font-size:26px;cursor:pointer}
 @media(max-width:900px){
- dialog[open]{grid-template-columns:1fr;max-height:92svh;overflow:auto;margin:auto auto 0;border-radius:22px 22px 0 0;width:100%;max-width:100%}
+ dialog[open]{grid-template-columns:minmax(0,1fr);grid-template-rows:200px minmax(0,1fr);max-height:90dvh;overflow:hidden;position:fixed;left:0;right:0;bottom:0;top:auto;margin:0;border-radius:22px 22px 0 0;width:100%;max-width:100%}
+ .db{overflow:auto}
  dialog img{min-height:0;height:200px}
 }
 @media(prefers-reduced-motion:reduce){dialog[open],.hero .btn{animation:none}}
@@ -228,7 +233,7 @@ dialog img{width:100%;height:100%;min-height:300px;object-fit:cover}
 </div></section>
 
 <section id="about" class="about" aria-labelledby="ah"><div class="wrap two">
- <div class="px ri"><img data-px="0.2" loading="lazy" src="https://www.globalsupplycentre.com/wp-content/uploads/2023/01/about-us-new.png" alt="GSC Group team and operations"></div>
+ <div class="px ri"><img data-px="0.2" data-fb="1" src="https://www.globalsupplycentre.com/wp-content/uploads/2023/01/hospitality-new.jpg" onerror="this.onerror=null;this.src='https://www.globalsupplycentre.com/wp-content/uploads/2023/01/retail-new1.jpg'" alt="GSC Group supplying hotels and restaurants in Seychelles"></div>
  <div class="rv rr">
   <h2 id="ah">From a food trader to Seychelles’ integrated service provider</h2>
   <p class="lead">GSC began by serving the HORECA sector (hotels, restaurants and catering) and has grown into a partner for businesses of every kind across the islands.</p>
@@ -367,7 +372,7 @@ $('[data-v]').forEach(function(b){b.onclick=function(){var v=V[b.dataset.v];
 document.getElementById('dx').onclick=function(){dg.close()};
 dg.onclick=function(e){if(e.target===dg)dg.close()};
 document.getElementById('de').onclick=function(e){e.preventDefault();dg.close();var sel=document.querySelector('select[name=vertical]');sel.value=dg.dataset.v;document.getElementById('contact').scrollIntoView({behavior:'smooth'})};
-document.addEventListener('error',function(e){if(e.target.tagName==='IMG')e.target.style.visibility='hidden'},true);
+document.addEventListener('error',function(e){if(e.target.tagName==='IMG'&&!e.target.dataset.fb)e.target.style.visibility='hidden'},true);
 </script>
 </body>
 </html>
